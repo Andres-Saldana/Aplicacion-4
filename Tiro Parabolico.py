@@ -16,7 +16,7 @@ def tap(x, y):
 
 def inside(xy):
     "Return True if xy within screen."
-    return -200 < xy.x < 200 and -200 < xy.y < 200
+    return -100000 < xy.x < 200 and -200 < xy.y < 200 # las pelotas no desaparecen
 
 def draw():
     "Draw ball and targets."
@@ -39,17 +39,17 @@ def move():
         target = vector(200, y)
         targets.append(target)
 
-    for target in targets:
-        target.x -= 0.5
+    for target in targets: # velocidad de los proyectiles
+        target.x -= 1.5
 
-    if inside(ball):
+    if inside(ball): #gravedad de la bola
         speed.y -= 0.35
         ball.move(speed)
 
     dupe = targets.copy()
     targets.clear()
 
-    for target in dupe:
+    for target in dupe: # se borra el target cuando lo toca la bola
         if abs(target - ball) > 13:
             targets.append(target)
 
